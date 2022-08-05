@@ -5,6 +5,7 @@ import { Pagination } from "antd";
 function CardsList() {
   const [news, setNews] = useState<news[][]>();
   const [page, setPage] = useState(1);
+  const [selectedPost, setSelectedPost] = useState("");
 
   const getData = async () => {
     const data = await latestNewsGetter();
@@ -14,7 +15,10 @@ function CardsList() {
     getData();
   }, []);
 
-  console.log(news);
+  const onSelect = (id: string) => {
+    setSelectedPost(id);
+  };
+  console.log(selectedPost);
 
   return (
     <div className="max-w-[1100px] mx-auto mt-20">
@@ -22,9 +26,14 @@ function CardsList() {
         {news &&
           news[page].map((item) => (
             <Card
+              key={item._id}
               title={item.topic}
               description={item.title}
               imageURL={item.media}
+              id={item._id}
+              summary={item.summary}
+              onSelect={onSelect}
+              isOpen={selectedPost === item._id}
             />
           ))}
       </div>
