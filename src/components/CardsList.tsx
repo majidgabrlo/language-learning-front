@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import latestNewsGetter, { news } from "../utils/latestNewsGetter";
-import { Pagination } from "@mui/material";
+import { Pagination } from "antd";
 function CardsList() {
   const [news, setNews] = useState<news[][]>();
   const [page, setPage] = useState(1);
@@ -20,6 +20,8 @@ function CardsList() {
     getData();
   }, []);
 
+  console.log(news);
+
   return (
     <div className="max-w-[1100px] mx-auto mt-20">
       <div className="grid grid-cols-3 justify-center gap-5">
@@ -32,11 +34,13 @@ function CardsList() {
             />
           ))}
       </div>
+
       <Pagination
-        page={page}
-        className="flex justify-center my-6"
-        onChange={(_, page) => setPage(page)}
-        count={news?.length}
+        className="!flex justify-center !my-6"
+        current={page}
+        pageSize={1}
+        onChange={(page) => setPage(page)}
+        total={news?.length}
       />
     </div>
   );

@@ -1,9 +1,5 @@
-import {
-  Card as CardContainer,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card as CardContainer } from "antd";
+import Meta from "antd/lib/card/Meta";
 import { FC } from "react";
 
 type CardProps = {
@@ -13,21 +9,18 @@ type CardProps = {
 };
 const Card: FC<CardProps> = ({ description, imageURL, title }) => {
   return (
-    <CardContainer className="mx-auto" sx={{ width: 345 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={imageURL}
-        alt="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </CardContent>
+    <CardContainer
+      hoverable
+      style={{ width: 240 }}
+      cover={
+        <img
+          alt="example"
+          src={imageURL}
+          className="h-40 object-cover"
+        />
+      }
+    >
+      <Meta title={title} description={description} />
     </CardContainer>
   );
 };
