@@ -17,8 +17,7 @@ function CardsList() {
 
   const onSelect = (id: string) => {
     setSelectedPost(id);
-  };
-  console.log(selectedPost);
+  };  
 
   return (
     <div className="max-w-[1100px] mx-auto mt-20">
