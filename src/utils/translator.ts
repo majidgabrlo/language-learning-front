@@ -9,8 +9,10 @@ const translator = async (
   encodedParams.append("target_language", target);
   encodedParams.append("text", text);
 
-  const data = await axios.post("", encodedParams);
-  return data.data.translatedText;
+  const data = await axios.post("", encodedParams); 
+  console.log(data);
+  
+  return data.data.data.translatedText;
 };
 
 export default translator;
