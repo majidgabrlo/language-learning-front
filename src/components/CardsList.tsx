@@ -6,17 +6,11 @@ function CardsList() {
   const [news, setNews] = useState<news[][]>();
   const [page, setPage] = useState(1);
 
+  const getData = async () => {
+    const data = await latestNewsGetter();
+    setNews(data);
+  };
   useEffect(() => {
-    const getData = async () => {
-      const slicedArray: news[][] = [];
-      const data = await latestNewsGetter();
-      while (data.length > 10) {
-        slicedArray.push(data.slice(0, 10));
-        data.splice(0, 10);
-      }
-      slicedArray.push(data);
-      setNews(slicedArray);
-    };
     getData();
   }, []);
 

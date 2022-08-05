@@ -17,8 +17,8 @@ export type news = {
   _id: string;
 };
 
-const latestNewsGetter = async (): Promise<news[]> => {
-  const data = await axios.get(
+const latestNewsGetter = async (): Promise<news[][]> => {
+  const payload = await axios.get(
     "https://newscatcher.p.rapidapi.com/v1/latest_headlines",
     {
       params: { lang: "fr", media: "True" },
@@ -27,8 +27,15 @@ const latestNewsGetter = async (): Promise<news[]> => {
         "X-RapidAPI-Host": "newscatcher.p.rapidapi.com",
       },
     }
-  );  
-  return data.data.articles;
+  );
+  const data = payload.data.articles;
+  const slicedArray: news[][] = [];
+  while (data.length > 12) {
+    slicedArray.push(data.slice(0, 12));
+    data.splice(0, 12);
+  }
+  slicedArray.push(data);
+  return slicedArray
 };
 
 export default latestNewsGetter;
