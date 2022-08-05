@@ -1,8 +1,7 @@
-import translator from "./utils/translator";
-import latestNewsGetter from "./utils/latestNewsGetter";
+import CardsList from "./components/CardsList";
 
 const App = () => {
-  return <div></div>;
+  return <CardsList />;
 };
 
 export default App;

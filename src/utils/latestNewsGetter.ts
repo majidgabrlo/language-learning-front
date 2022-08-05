@@ -1,6 +1,6 @@
 import axios from "axios";
 
-type news = {
+export type news = {
   summary: string;
   country: string;
   author: string;
@@ -27,7 +27,7 @@ const latestNewsGetter = async (): Promise<news[]> => {
         "X-RapidAPI-Host": "newscatcher.p.rapidapi.com",
       },
     }
-  );
+  );  
   return data.data.articles;
 };
 
