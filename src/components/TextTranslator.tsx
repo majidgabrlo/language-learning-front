@@ -19,14 +19,18 @@ const TextTranslator: FC<TextTranslatorProps> = ({ summary }) => {
     <>
       {summaryAsArray.map((word) => (
         <Popconfirm
-          title={<div>{translated}</div>}
+          title={!!translated ? <div>{translated}</div> : <div>Loading...</div>}
+          icon={null}
           okText="OK"
-          cancelButtonProps={{ hidden: true }}
-          icon={false}
         >
-          <span onClick={() => translationHandler(word)} role="text">
-            {word}{" "}
+          <span
+            className="transition py-0.5 px-[1px] rounded hover:bg-indigo-300"
+            onClick={() => translationHandler(word)}
+            role="text"
+          >
+            {word}
           </span>
+          <span> </span>
         </Popconfirm>
       ))}
     </>
