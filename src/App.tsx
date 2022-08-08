@@ -4,8 +4,9 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Main from "./pages/Main";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import { setAuth } from "./store/auth/authSlice";
+import { getUserData } from "./store/auth/authAction";
 import { useAppDispatch } from "./store/hooks";
+import { setAppLanguage } from "./store/language/languageAction";
 import authChecker from "./utils/authController";
 
 export const client = new ApolloClient({
@@ -25,8 +26,13 @@ const App = () => {
       try {
         const data = await authChecker();
         if (data) {
-          dispatch(setAuth({ ...data }));
+          dispatch(getUserData({ ...data }));
           setIsAuthenticated(true);
+          if (localStorage.getItem("selectedLearningLang")) {
+            dispatch(
+              setAppLanguage(localStorage.getItem("selectedLearningLang"))
+            );
+          }
         } else {
           navigate("/signin");
         }

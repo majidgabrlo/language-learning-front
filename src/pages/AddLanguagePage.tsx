@@ -104,6 +104,7 @@ function AddLanguagePage() {
                       key={lang.shortName}
                       onClick={() => {
                         dispatch(setAppLanguage(lang.shortName));
+                        localStorage.setItem("selectedLearningLang",lang.shortName)
                       }}
                       className="flex gap-x-5 my-3 cursor-pointer bg-indigo-700 px-2 py-2 rounded text-white hover:bg-indigo-900"
                     >

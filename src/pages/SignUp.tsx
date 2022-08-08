@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSignUpMutation } from "./__generated__/SignUp";
 
-
 function SignUp() {
   const [signUp] = useSignUpMutation();
   const [errors, setErrors] = useState<string[]>([]);
@@ -29,20 +28,23 @@ function SignUp() {
         credentials: { email, password },
         name,
       },
-    }).then((res) => {
-      if (res.data?.signup.token) {
-        localStorage.setItem("languageToken", res.data.signup.token);
-        window.location.reload();
-      } else {
-        res.data?.signup.userErrors.map((error) =>
-          setErrors([...errors, error.message])
-        );
-      }
-    }).catch(err=>{
-      if(err.message.includes('E11000')){
-        setErrors(["Email is already taken"])
-      }
-    });
+    })
+      .then((res) => {
+        if (res.data?.signup.token) {
+          localStorage.setItem("languageToken", res.data.signup.token);
+          localStorage.setItem("selectedLearningLang", "");
+          window.location.reload();
+        } else {
+          res.data?.signup.userErrors.map((error) =>
+            setErrors([...errors, error.message])
+          );
+        }
+      })
+      .catch((err) => {
+        if (err.message.includes("E11000")) {
+          setErrors(["Email is already taken"]);
+        }
+      });
   };
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">

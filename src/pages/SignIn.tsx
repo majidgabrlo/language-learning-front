@@ -18,6 +18,7 @@ function SignIn() {
     singIn({ variables: { credentials: { ...formData } } }).then((res) => {
       if (res.data?.signin.token) {
         localStorage.setItem("languageToken", res.data.signin.token);
+        localStorage.setItem("selectedLearningLang","")
         window.location.reload();
       } else {
         res.data?.signin.userErrors.map((error) =>

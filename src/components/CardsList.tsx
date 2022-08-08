@@ -18,7 +18,7 @@ function CardsList() {
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [selectedLanguage]);
 
   const onSelect = (id: string) => {
     setSelectedPost(id);

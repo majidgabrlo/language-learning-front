@@ -2,9 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type languageType = {
   selectedLanguage: string;
+  flagUrl: string;
+  fullName: string;
 };
 const initialState: languageType = {
   selectedLanguage: "",
+  flagUrl: "",
+  fullName: "",
 };
 
 export const languageSlice = createSlice({
@@ -13,6 +17,8 @@ export const languageSlice = createSlice({
   reducers: {
     setLanguage: (state, action: PayloadAction<languageType>) => {
       state.selectedLanguage = action.payload.selectedLanguage;
+      state.flagUrl = action.payload.flagUrl;
+      state.fullName = action.payload.fullName;
     },
   },
 });

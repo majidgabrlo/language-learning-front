@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import CardsList from "../components/CardsList";
+import Header from "../components/Header";
 import { useAppSelector } from "../store/hooks";
 import AddLanguagePage from "./AddLanguagePage";
 
@@ -8,7 +9,12 @@ function Main() {
     (state) => state.language.selectedLanguage
   );
 
-  if (!selectedLanguage) {
+    console.log(useAppSelector(
+      (state) => state
+    ));
+    
+
+  if (!selectedLanguage && !localStorage.getItem("selectedLearningLang")) {
     return (
       <div>
         <AddLanguagePage />
@@ -16,7 +22,12 @@ function Main() {
     );
   }
 
-  return <CardsList />;
+  return (
+    <div>
+      <Header />
+      <CardsList />
+    </div>
+  );
 }
 
 gql`
