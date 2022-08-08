@@ -1,0 +1,26 @@
+overwrite: true
+schema: "http://localhost:4000"
+documents:
+  - "./src/**/*.{ts,tsx}"
+  - "!**/__generated__/*"
+generates:
+  src/__generated__/graphql-types.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: __generated__/graphql-types.ts
+      folder: __generated__
+      extension: .ts
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      strictScalars: true
+      scalars:
+        uuid: uuid
+      withHooks: true
+      experimentalFragmentVariables: true
+hooks:
+  afterAllFileWrite:
+    - "eslint './**/__generated__/*.ts' --fix --no-ignore --rule '@typescript-eslint/no-unused-vars: off'"
