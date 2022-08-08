@@ -33,6 +33,9 @@ const Card: FC<CardProps> = ({
     >
       <Meta title={title} description={description} />
       <Modal
+        onCancel={() => {
+          onSelect("");
+        }}
         title={description}
         centered
         visible={isOpen}

@@ -2,13 +2,18 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import latestNewsGetter, { news } from "../utils/latestNewsGetter";
 import { Pagination } from "antd";
+import { useAppSelector } from "../store/hooks";
 function CardsList() {
   const [news, setNews] = useState<news[][]>();
   const [page, setPage] = useState(1);
   const [selectedPost, setSelectedPost] = useState("");
+  const selectedLanguage = useAppSelector(
+    (state) => state.language.selectedLanguage
+  );
+
 
   const getData = async () => {
-    const data = await latestNewsGetter();
+    const data = await latestNewsGetter(selectedLanguage);
     setNews(data);
   };
   useEffect(() => {
@@ -17,7 +22,7 @@ function CardsList() {
 
   const onSelect = (id: string) => {
     setSelectedPost(id);
-  };  
+  };
 
   return (
     <div className="max-w-[1100px] mx-auto mt-20">
