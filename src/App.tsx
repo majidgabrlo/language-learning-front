@@ -1,13 +1,12 @@
-import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import CardsList from "./components/CardsList";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { setAuth } from "./store/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { useAppDispatch } from "./store/hooks";
 import authChecker from "./utils/authController";
-
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -40,17 +39,22 @@ const App = () => {
 
   if (isAuthenticated) {
     return (
-      <Routes>
-        <Route path="/" element={<CardsList />} />
-      </Routes>
+      <ApolloProvider client={client}>
+        <Routes>
+          <Route path="/" element={<CardsList />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </ApolloProvider>
     );
   }
 
   return (
-    <Routes>
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signin" element={<SignIn />} />
-    </Routes>
+    <ApolloProvider client={client}>
+      <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+    </ApolloProvider>
   );
 };
 
