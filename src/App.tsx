@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import CardsList from "./components/CardsList";
+import Main from "./pages/Main";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { setAuth } from "./store/auth/authSlice";
@@ -41,7 +41,7 @@ const App = () => {
     return (
       <ApolloProvider client={client}>
         <Routes>
-          <Route path="/" element={<CardsList />} />
+          <Route path="/" element={<Main />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ApolloProvider>
