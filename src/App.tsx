@@ -1,9 +1,11 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import Header from "./components/Header";
 import Main from "./pages/Main";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Words from "./pages/Words";
 import { getUserData } from "./store/auth/authAction";
 import { useAppDispatch } from "./store/hooks";
 import { setAppLanguage } from "./store/language/languageAction";
@@ -46,8 +48,10 @@ const App = () => {
   if (isAuthenticated) {
     return (
       <ApolloProvider client={client}>
+        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/words" element={<Words />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ApolloProvider>

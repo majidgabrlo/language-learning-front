@@ -25,7 +25,7 @@ const Card: FC<CardProps> = ({
   return (
     <CardContainer
       hoverable
-      style={{ width: 240 }}
+      className="!mx-auto md:w-[240px]"
       onClick={() => {
         if (!isOpen) onSelect(id);
       }}

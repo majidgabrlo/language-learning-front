@@ -3,12 +3,20 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { gql } from "@apollo/client";
 import { useGetLanguageListQuery } from "./__generated__/Header";
 import { setAppLanguage } from "../store/language/languageAction";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function Header() {
-  const { data } = useGetLanguageListQuery();
+  const { data,refetch } = useGetLanguageListQuery();
+  const currentPath = useLocation();
+
   const { auth, language } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    refetch()
+  }, [language])
+  
   const userLanguages = data?.languagesList
     .map((lang) => {
       const shortNames =
@@ -35,14 +43,14 @@ function Header() {
         subTitle={<div>{language.fullName}</div>}
         extra={[
           <div className="font-bold uppercase">{auth.name}</div>,
-          <Select
+          language.selectedLanguage && <Select
             value={language.selectedLanguage}
             style={{ width: 150 }}
             onChange={(value) => {
               if (value === "add") {
                 changeLanguage();
                 localStorage.setItem("selectedLearningLang", "");
-                return
+                return;
               }
               changeLanguage(value);
               localStorage.setItem("selectedLearningLang", value);
@@ -64,6 +72,15 @@ function Header() {
               <div className="flex gap-x-5">Add language</div>
             </Select.Option>
           </Select>,
+          currentPath.pathname!=="/words" ? (
+            <Link to="/words">
+              <Button>Words</Button>
+            </Link>
+          ) : (
+            <Link to="/">
+              <Button>Home</Button>
+            </Link>
+          ),
           <Button
             onClick={() => {
               localStorage.setItem("languageToken", "");

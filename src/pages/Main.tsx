@@ -9,11 +9,6 @@ function Main() {
     (state) => state.language.selectedLanguage
   );
 
-    console.log(useAppSelector(
-      (state) => state
-    ));
-    
-
   if (!selectedLanguage && !localStorage.getItem("selectedLearningLang")) {
     return (
       <div>
@@ -24,7 +19,6 @@ function Main() {
 
   return (
     <div>
-      <Header />
       <CardsList />
     </div>
   );

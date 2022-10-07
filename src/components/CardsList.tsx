@@ -26,7 +26,7 @@ function CardsList() {
 
   return (
     <div className="max-w-[1100px] mx-auto mt-20">
-      <div className="grid grid-cols-3 justify-center gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-5">
         {news &&
           news[page].map((item) => (
             <Card

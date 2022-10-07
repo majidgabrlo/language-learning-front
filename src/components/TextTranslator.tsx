@@ -49,7 +49,7 @@ const TextTranslator: FC<TextTranslatorProps> = ({ summary }) => {
           }}
         >
           <span
-            className="transition py-0.5 px-[1px] rounded hover:bg-indigo-300"
+            className="transition font-serif py-0.5 px-[1px] rounded hover:bg-indigo-300"
             onClick={() => translationHandler(word)}
             role="text"
           >
