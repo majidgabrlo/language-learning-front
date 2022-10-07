@@ -88,7 +88,14 @@ export type Query = {
   languageList: Array<Language>;
   languagesList: Array<LanguageListItem>;
   me?: Maybe<User>;
+  savedWordsInText?: Maybe<Array<Scalars['String']>>;
   wordsList: Array<Word>;
+};
+
+
+export type QuerySavedWordsInTextArgs = {
+  languageShortName: Scalars['String'];
+  text: Scalars['String'];
 };
 
 
