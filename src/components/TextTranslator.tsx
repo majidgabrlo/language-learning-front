@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { notification, Popconfirm } from "antd";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useAppSelector } from "../store/hooks";
 import translator from "../utils/translator";
 import { useAddWordMutation, useSavedWordsQuery } from "./__generated__/TextTranslator";

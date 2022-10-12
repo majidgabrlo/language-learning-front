@@ -57,7 +57,7 @@ function Header() {
             }}
           >
             {userLanguages?.map((item) => (
-              <Select.Option value={item?.shortName}>
+              <Select.Option key={item?.shortName} value={item?.shortName}>
                 <div className="flex gap-x-5">
                   <img
                     className="w-8 h-6 my-auto rounded"
