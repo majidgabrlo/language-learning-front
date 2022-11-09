@@ -11,6 +11,8 @@ import { useAppDispatch } from "./store/hooks";
 import { setAppLanguage } from "./store/language/languageAction";
 import authChecker from "./utils/authController";
 
+
+// We should save detail in .env file but just for making cloning easy I used this way
 export const client = new ApolloClient({
   uri: "http://localhost:4000",
   cache: new InMemoryCache(),
